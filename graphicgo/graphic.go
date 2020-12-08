@@ -19,7 +19,7 @@ var backgroundBuff [screenSize] byte
  * @return error
  */
 func GraphInit() error {
-	file, err := os.OpenFile(devPath, os.O_WRONLY, 0664)
+	file, err := os.OpenFile(devPath, os.O_RDWR, 0664)
 	defer file.Close()
 	if err != nil {
 		fmt.Println("open file failed!, err:", err)
@@ -74,5 +74,9 @@ func SetFontColor(color GColor) {
  */
 func ResetScreen() {
 	defer GraphWrong()
-	_, err := dev.Write(backgroundBuff)
+	_, err := dev.Write(backgroundBuff[:])
+	if err != nil {
+		fmt.Println(err)
+		GraphWrong()
+	}
 }

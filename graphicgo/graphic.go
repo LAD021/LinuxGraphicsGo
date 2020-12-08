@@ -10,9 +10,9 @@ var bgColor = BLACK
 var graphColor = WHITE
 var fontColor = WHITE
 
-const screenSize = screenHeight * screenWidth * 3
+const screenSize = screenHeight * screenWidth * pixWidth
 
-var backgroundBuff [screenSize]uint8
+var backgroundBuff [screenSize] byte
 
 /**
  * @Description: to start the module
@@ -28,6 +28,8 @@ func GraphInit() error {
 		dev = file
 		fmt.Println("GraphGo start successfully!")
 	}
+	SetBgColor(RED)
+	ResetScreen()
 	return err
 }
 
@@ -39,16 +41,23 @@ func GraphBye() {
 	dev = nil
 }
 
+func GraphWrong() {
+	fmt.Println("Wrong")
+	dev.Close()
+	dev = nil
+}
+
 /**
  * @Description: set BgColor and reset the BgColor Buff
  * @param color
  */
 func SetBgColor(color GColor) {
 	bgColor = color
-	for i := 0; i < screenSize; i += 3 {
+	for i := 0; i < screenSize; i += pixWidth {
 		backgroundBuff[i] = bgColor.B
 		backgroundBuff[i+1] = bgColor.G
 		backgroundBuff[i+2] = bgColor.R
+		backgroundBuff[i+3] = 0xff
 	}
 }
 
@@ -64,5 +73,6 @@ func SetFontColor(color GColor) {
  * @Description: to fill screen with bgColor
  */
 func ResetScreen() {
-
+	defer GraphWrong()
+	_, err := dev.Write(backgroundBuff)
 }

@@ -5,6 +5,10 @@ import (
 	"os"
 )
 
+const screenSize = screenWidth * screenHeight * pixWidth
+
+var backgroundBuff [screenSize]byte
+
 var dev *os.File
 var bgColor = BLACK
 var graphColor = WHITE
@@ -26,7 +30,7 @@ func GraphInit() error {
 	}
 	SetBgColor(RED)
 	// start building the screen buff
-	
+
 	ResetScreen()
 	return err
 }

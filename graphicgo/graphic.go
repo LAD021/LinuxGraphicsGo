@@ -69,6 +69,7 @@ func SetGraphColor(color GColor) {
 	graphBuff[0] = graphColor.B
 	graphBuff[1] = graphColor.G
 	graphBuff[2] = graphColor.R
+	graphBuff[3] = 0xff
 }
 
 func SetFontColor(color GColor) {

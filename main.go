@@ -15,6 +15,6 @@ func main() {
 	graphicgo.SetBgColor(graphicgo.BLUE)
 	graphicgo.ResetScreen()
 	for i := int64(0); i < int64(100); i++ {
-		graphicgo.DrawDot(i, i)
+		graphicgo.DrawDot(i, i*2)
 	}
 }

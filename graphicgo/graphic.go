@@ -8,6 +8,7 @@ import (
 const screenSize = screenWidth * screenHeight * pixWidth
 
 var backgroundBuff [screenSize]byte
+var graphBuff [4]byte
 
 var dev *os.File
 var bgColor = BLACK
@@ -28,8 +29,8 @@ func GraphInit() error {
 		fmt.Println("GraphGo start successfully!")
 	}
 	SetBgColor(RED)
+	SetGraphColor(GREEN)
 	// start building the screen buff
-
 	ResetScreen()
 	return err
 }
@@ -55,7 +56,7 @@ func GraphWrong() {
  */
 func SetBgColor(color GColor) {
 	bgColor = color
-	for i := 0; i < screenSize; i += pixWidth {
+	for i := 0; i < int(screenSize); i += int(pixWidth) {
 		backgroundBuff[i] = bgColor.B
 		backgroundBuff[i+1] = bgColor.G
 		backgroundBuff[i+2] = bgColor.R
@@ -65,6 +66,9 @@ func SetBgColor(color GColor) {
 
 func SetGraphColor(color GColor) {
 	graphColor = color
+	graphBuff[0] = graphColor.B
+	graphBuff[1] = graphColor.G
+	graphBuff[2] = graphColor.R
 }
 
 func SetFontColor(color GColor) {

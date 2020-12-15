@@ -11,7 +11,8 @@ func main() {
 		os.Exit(-1)
 	}
 	defer graphicgo.GraphBye()
-	time.Sleep(1)
+	time.Sleep(100)
 	graphicgo.SetBgColor(graphicgo.BLUE)
 	graphicgo.ResetScreen()
+	graphicgo.DrawDot(100, 100)
 }

@@ -38,6 +38,7 @@ func GraphInit() error {
  * @Description: to end up the module
  */
 func GraphBye() {
+	fmt.Println("GraphGo goodbye!")
 	dev.Close()
 	dev = nil
 }
@@ -74,6 +75,7 @@ func SetFontColor(color GColor) {
  * @Description: to fill screen with bgColor
  */
 func ResetScreen() {
+	dev.Seek(0, 0)
 	_, err := dev.Write(backgroundBuff[:])
 	if err != nil {
 		fmt.Println(err)

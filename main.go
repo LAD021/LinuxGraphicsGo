@@ -12,6 +12,6 @@ func main() {
 	}
 	defer graphicgo.GraphBye()
 	time.Sleep(1)
-	graphicgo.SetBgColor(graphicgo.PaleTurquoise1)
+	graphicgo.SetBgColor(graphicgo.BLUE)
 	graphicgo.ResetScreen()
 }

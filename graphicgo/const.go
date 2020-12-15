@@ -1,9 +1,9 @@
 package graphicgo
 
 // Colors
-var RED GColor = GColor{0, 0, 255}
-var GREEN GColor = GColor{0, 255, 0}
-var BLUE GColor = GColor{255, 0, 0}
-var BLACK GColor = GColor{0, 0, 0}
-var WHITE GColor = GColor{255, 255, 255}
-var PaleTurquoise1 GColor = GColor{187, 255, 255}
+var RED = [4]byte{0, 0, 255, 255}
+var GREEN = [4]byte{0, 255, 0, 255}
+var BLUE = [4]byte{255, 0, 0, 255}
+var BLACK = [4]byte{0, 0, 0, 255}
+var WHITE = [4]byte{255, 255, 255, 255}
+var PaleTurquoise1 = [4]byte{187, 255, 255, 255}

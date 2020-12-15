@@ -54,25 +54,20 @@ func GraphWrong() {
  * @Description: set BgColor and reset the BgColor Buff
  * @param color
  */
-func SetBgColor(color GColor) {
-	bgColor = color
+func SetBgColor(color [4]byte) {
 	for i := 0; i < int(screenSize); i += int(pixWidth) {
-		backgroundBuff[i] = bgColor.B
-		backgroundBuff[i+1] = bgColor.G
-		backgroundBuff[i+2] = bgColor.R
-		backgroundBuff[i+3] = 0xff
+		backgroundBuff[i] = color[0]
+		backgroundBuff[i+1] = color[1]
+		backgroundBuff[i+2] = color[2]
+		backgroundBuff[i+3] = color[3]
 	}
 }
 
-func SetGraphColor(color GColor) {
+func SetGraphColor(color [4]byte) {
 	graphColor = color
-	graphBuff[0] = graphColor.B
-	graphBuff[1] = graphColor.G
-	graphBuff[2] = graphColor.R
-	graphBuff[3] = 0xff
 }
 
-func SetFontColor(color GColor) {
+func SetFontColor(color [4]byte) {
 	fontColor = color
 }
 

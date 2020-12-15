@@ -28,7 +28,7 @@ func GraphInit() error {
 		dev = file
 		fmt.Println("GraphGo start successfully!")
 	}
-	SetBgColor(RED)
+	SetBgColor(BLACK)
 	// start building the screen buff
 
 	ResetScreen()

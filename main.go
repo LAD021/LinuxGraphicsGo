@@ -14,6 +14,7 @@ func main() {
 	time.Sleep(100)
 	graphicgo.SetBgColor(graphicgo.GREEN)
 	graphicgo.ResetScreen()
+	graphicgo.SetGraphColor(graphicgo.RED)
 	for i := int64(0); i < int64(100); i++ {
 		graphicgo.DrawDot(i, i*2)
 	}

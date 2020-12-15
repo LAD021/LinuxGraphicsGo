@@ -20,7 +20,6 @@ var fontColor = WHITE
  */
 func GraphInit() error {
 	file, err := os.OpenFile(devPath, os.O_RDWR, 0664)
-	defer file.Close()
 	if err != nil {
 		fmt.Println("open file failed!, err:", err)
 		return err
@@ -75,7 +74,6 @@ func SetFontColor(color GColor) {
  * @Description: to fill screen with bgColor
  */
 func ResetScreen() {
-	defer GraphWrong()
 	_, err := dev.Write(backgroundBuff[:])
 	if err != nil {
 		fmt.Println(err)

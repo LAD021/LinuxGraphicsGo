@@ -10,10 +10,6 @@ var bgColor = BLACK
 var graphColor = WHITE
 var fontColor = WHITE
 
-const screenSize = screenHeight * screenWidth * pixWidth
-
-var backgroundBuff [screenSize] byte
-
 /**
  * @Description: to start the module
  * @return error
@@ -29,6 +25,8 @@ func GraphInit() error {
 		fmt.Println("GraphGo start successfully!")
 	}
 	SetBgColor(RED)
+	// start building the screen buff
+	
 	ResetScreen()
 	return err
 }

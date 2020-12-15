@@ -3,7 +3,7 @@ package graphicgo
 import "fmt"
 
 func getPoint(x int64, y int64) (newPos int64, err error) {
-	return dev.Seek((x*screenHeight+y)*pixWidth, 0)
+	return dev.Seek((x+screenHeight*y)*pixWidth, 0)
 }
 
 func DrawDot(x int64, y int64) {

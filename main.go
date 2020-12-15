@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"sync"
 	"time"
 )
 import "LinuxGraphicsGo/graphicgo"
@@ -19,4 +20,6 @@ func main() {
 	//for i := int64(0); i < int64(100); i++ {
 	//	graphicgo.DrawDot(i, i*2, graphicgo.RED)
 	//}
+	var wg sync.WaitGroup
+	wg.Add(2)
 }

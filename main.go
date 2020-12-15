@@ -22,4 +22,5 @@ func main() {
 	//}
 	var wg sync.WaitGroup
 	wg.Add(2)
+	wg.Wait()
 }

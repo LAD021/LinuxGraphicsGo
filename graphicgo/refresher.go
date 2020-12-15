@@ -12,7 +12,7 @@ const (
 
 type refreshJob struct {
 	chCmd chan int
-	FPS   float64
+	FPS   int64
 }
 
 var (
@@ -30,7 +30,7 @@ func NewRefreshJob() *refreshJob {
 	return instance
 }
 
-func (job *refreshJob) SetFPS(fps float64) {
+func (job *refreshJob) SetFPS(fps int64) {
 	job.FPS = fps
 }
 
@@ -38,7 +38,8 @@ func (job *refreshJob) Start() {
 	if job.FPS == 0 {
 		job.FPS = 24
 	}
-	ticker := time.NewTicker(time.Second / time.Duration(1/job.FPS))
+	timeSpace := time.Duration(int64(time.Second) / job.FPS)
+	ticker := time.NewTicker(timeSpace)
 	go func() {
 		fmt.Println("Refresher Start!")
 		for {

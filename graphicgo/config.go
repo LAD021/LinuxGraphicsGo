@@ -1,6 +1,6 @@
 package graphicgo
 
-const devPath string = "source/devtest"
+const devPath string = "/dev/fb0"
 
 const screenHeight = 720
 const screenWidth = 1280

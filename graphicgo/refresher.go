@@ -49,9 +49,10 @@ func (job *refreshJob) Start() {
 			case <-ticker.C:
 				fmt.Println("Printing")
 				job.RefreshSig <- StartCmd
+				fmt.Println("Done")
 				refreshBg() // test
 				resetScreen()
-				fmt.Println("Done")
+
 			case cmd := <-job.chCmd:
 				if cmd == StopCmd {
 					ticker.Stop()

@@ -114,7 +114,7 @@ func DrawCircle(xc int64, yc int64, r int64, color [4]byte, width int, fill bool
 
 	for x <= y {
 		if fill {
-			for yi = y - 10; yi <= y; yi++ {
+			for yi = yc; yi <= y; yi++ {
 				drawCircle8(xc, yc, x, yi, color, width)
 			}
 		} else {

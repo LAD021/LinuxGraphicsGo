@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"sync"
 	"time"
@@ -23,6 +24,7 @@ func main() {
 		case <-job.RefreshSig:
 			for i := int64(0); i < int64(100); i++ {
 				go graphicgo.DrawDot(i, i*2, graphicgo.RED, graphicgo.Middle)
+				fmt.Println(i)
 			}
 		}
 	}()

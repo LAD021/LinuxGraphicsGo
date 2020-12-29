@@ -48,14 +48,10 @@ func (job *refreshJob) Start() {
 			select {
 			case <-ticker.C:
 				//fmt.Println("Printing")
-				go func() {
-					a := <-job.RefreshSig
-					fmt.Println(a)
-				}()
-				job.RefreshSig <- StartCmd
 				fmt.Println("Done")
 				resetScreen()
 				refreshBg() // test
+				job.RefreshSig <- StartCmd
 
 			case cmd := <-job.chCmd:
 				if cmd == StopCmd {

@@ -30,7 +30,10 @@ func main() {
 	}()
 	for i := int64(0); i < int64(100); i++ {
 		graphicgo.DrawDot(i, i*2, graphicgo.RED, graphicgo.Middle)
+		fmt.Println(i)
+		fmt.Println("good")
 	}
+	fmt.Println("Prepared")
 	var wg sync.WaitGroup
 	wg.Add(1)
 	wg.Wait()

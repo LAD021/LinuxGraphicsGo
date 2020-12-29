@@ -8,11 +8,13 @@ import (
 
 const (
 	StopCmd = iota
+	StartCmd
 )
 
 type refreshJob struct {
-	chCmd chan int
-	FPS   int64
+	chCmd      chan int
+	FPS        int64
+	RefreshSig chan int
 }
 
 var (
@@ -45,6 +47,7 @@ func (job *refreshJob) Start() {
 		for {
 			select {
 			case <-ticker.C:
+				job.RefreshSig <- StartCmd
 				refreshBg() // test
 				resetScreen()
 			case cmd := <-job.chCmd:

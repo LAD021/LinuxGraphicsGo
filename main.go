@@ -19,7 +19,7 @@ func main() {
 	job.SetFPS(100)
 	job.Start()
 	defer job.Stop()
-	func() {
+	go func() {
 		for {
 			select {
 			case cmd := <-job.RefreshSig:

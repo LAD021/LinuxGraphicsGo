@@ -47,8 +47,6 @@ func (job *refreshJob) Start() {
 		for {
 			select {
 			case <-ticker.C:
-				//fmt.Println("Printing")
-				fmt.Println("Done")
 				resetScreen()
 				refreshBg() // test
 				job.RefreshSig <- StartCmd

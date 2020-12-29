@@ -14,13 +14,14 @@ func main() {
 	defer graphicgo.GraphBye()
 	time.Sleep(100)
 	graphicgo.SetBgColor(graphicgo.GREEN)
-	job := graphicgo.NewRefreshJob()
+	job := graphicgo.GetRefreshJob()
 	job.SetFPS(100)
 	job.Start()
+	defer job.Stop()
 	//for i := int64(0); i < int64(100); i++ {
 	//	graphicgo.DrawDot(i, i*2, graphicgo.RED)
 	//}
 	var wg sync.WaitGroup
-	wg.Add(2)
+	wg.Add(1)
 	wg.Wait()
 }

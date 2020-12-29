@@ -8,6 +8,7 @@ import (
 const screenSize = screenWidth * screenHeight * pixWidth
 
 var backgroundBuff [screenSize]byte
+var drawBuff [screenSize]byte
 
 var dev *os.File
 var bgColor = BLACK
@@ -65,7 +66,7 @@ func refreshBgColor() {
  */
 func resetScreen() {
 	dev.Seek(0, 0)
-	_, err := dev.Write(backgroundBuff[:])
+	_, err := dev.Write(drawBuff[:])
 	if err != nil {
 		fmt.Println(err)
 		GraphWrong()

@@ -20,7 +20,7 @@ var (
 	instance      *refreshJob = nil
 )
 
-func NewRefreshJob() *refreshJob {
+func GetRefreshJob() *refreshJob {
 	refresherOnce.Do(func() {
 		instance = &refreshJob{
 			chCmd: make(chan int),
@@ -46,7 +46,6 @@ func (job *refreshJob) Start() {
 			select {
 			case <-ticker.C:
 				refreshBgColor() // test
-				fmt.Println("111")
 				resetScreen()
 			case cmd := <-job.chCmd:
 				if cmd == StopCmd {
@@ -57,4 +56,9 @@ func (job *refreshJob) Start() {
 			}
 		}
 	}()
+}
+
+func (job *refreshJob) Stop() {
+	fmt.Println("Refresher Stopped")
+	job.chCmd <- StopCmd
 }

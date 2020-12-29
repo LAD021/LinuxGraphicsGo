@@ -18,9 +18,9 @@ func main() {
 	job.SetFPS(100)
 	job.Start()
 	defer job.Stop()
-	//for i := int64(0); i < int64(100); i++ {
-	//	graphicgo.DrawDot(i, i*2, graphicgo.RED)
-	//}
+	for i := int64(0); i < int64(100); i++ {
+		graphicgo.DrawDot(i, i*2, graphicgo.RED, graphicgo.Middle)
+	}
 	var wg sync.WaitGroup
 	wg.Add(1)
 	wg.Wait()

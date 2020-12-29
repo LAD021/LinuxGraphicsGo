@@ -5,9 +5,9 @@ import (
 )
 
 const (
-	slim = iota
-	middle
-	bold
+	Slim = iota
+	Middle
+	Bold
 )
 
 func abs(x int64) (abs int64) {
@@ -19,15 +19,15 @@ func abs(x int64) (abs int64) {
 }
 
 func DrawDot(x int64, y int64, color [4]byte, width int) (err error) {
-	if width == slim {
+	if width == Slim {
 		dot(x, y, color)
-	} else if width == middle {
+	} else if width == Middle {
 		dot(x-1, y, color)
 		dot(x, y, color)
 		dot(x+1, y, color)
 		dot(x, y-1, color)
 		dot(x, y+1, color)
-	} else if width == bold {
+	} else if width == Bold {
 		dot(x, y-2, color)
 		dot(x-1, y-1, color)
 		dot(x, y-1, color)
@@ -85,5 +85,47 @@ func DrawLine(x1 int64, y1 int64, x2 int64, y2 int64, color [4]byte, width int) 
 			DrawDot(cx, cy, color, width)
 		}
 		cx += ix
+	}
+}
+
+func drawCircle8(xc int64, yc int64, x int64, y int64, color [4]byte, width int) {
+	DrawDot(xc+x, yc+y, color, width)
+	DrawDot(xc-x, yc+y, color, width)
+	DrawDot(xc+x, yc-y, color, width)
+	DrawDot(xc-x, yc-y, color, width)
+	DrawDot(xc+x, yc+y, color, width)
+	DrawDot(xc-x, yc+y, color, width)
+	DrawDot(xc+x, yc-y, color, width)
+	DrawDot(xc-x, yc-y, color, width)
+}
+
+func DrawCircle(xc int64, yc int64, r int64, color [4]byte, width int, fill bool) {
+	if xc+r < 0 ||
+		xc-r >= screenWidth ||
+		yc+r < 0 ||
+		yc-r >= screenHeight {
+		return
+	}
+
+	var x int64 = 0
+	var y int64 = r
+	var d int64 = 3 - 2*r
+	var yi int64
+
+	for x <= y {
+		if fill {
+			for yi = x; yi <= y; yi++ {
+				drawCircle8(xc, yc, x, yi, color, width)
+			}
+		} else {
+			drawCircle8(xc, yc, x, yi, color, width)
+		}
+		if d < 0 {
+			d = d + 4*x + 6
+		} else {
+			d = d + 4*(x-y) + 10
+			y--
+		}
+		x++
 	}
 }

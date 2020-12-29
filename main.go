@@ -19,6 +19,10 @@ func main() {
 	job.SetFPS(100)
 	job.Start()
 	defer job.Stop()
+	for i := int64(0); i < int64(100); i++ {
+		go graphicgo.DrawDot(i, i*2, graphicgo.RED, graphicgo.Middle)
+		fmt.Println(i)
+	}
 	go func() {
 		for {
 			select {

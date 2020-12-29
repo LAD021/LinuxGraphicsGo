@@ -17,24 +17,26 @@ func main() {
 	graphicgo.SetBgColor(graphicgo.GREEN)
 	job := graphicgo.GetRefreshJob()
 	job.SetFPS(100)
+	job.SetWork(func() {
+		graphicgo.DrawLine(300, 300, 400, 500, graphicgo.RED, graphicgo.Bold)
+		graphicgo.DrawCircle(200, 200, 150, graphicgo.RED, graphicgo.Bold, false)
+	})
 	job.Start()
 	defer job.Stop()
-	graphicgo.DrawLine(300, 300, 400, 500, graphicgo.RED, graphicgo.Bold)
-	graphicgo.DrawCircle(200, 200, 150, graphicgo.RED, graphicgo.Bold, true)
-	go func() {
-		for {
-			select {
-			case cmd := <-job.RefreshSig:
-				fmt.Println("we are doing")
-				if cmd == graphicgo.StartCmd {
-					for i := int64(0); i < int64(100); i++ {
-						go graphicgo.DrawDot(i, i*2, graphicgo.RED, graphicgo.Middle)
-						fmt.Println(i)
-					}
-				}
-			}
-		}
-	}()
+	//go func() {
+	//	for {
+	//		select {
+	//		case cmd := <-job.RefreshSig:
+	//			fmt.Println("we are doing")
+	//			if cmd == graphicgo.StartCmd {
+	//				for i := int64(0); i < int64(100); i++ {
+	//					go graphicgo.DrawDot(i, i*2, graphicgo.RED, graphicgo.Middle)
+	//					fmt.Println(i)
+	//				}
+	//			}
+	//		}
+	//	}
+	//}()
 
 	fmt.Println("Prepared")
 	var wg sync.WaitGroup

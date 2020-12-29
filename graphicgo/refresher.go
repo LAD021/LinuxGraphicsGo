@@ -15,6 +15,7 @@ type refreshJob struct {
 	chCmd      chan int
 	FPS        int64
 	RefreshSig chan int
+	work       func()
 }
 
 var (
@@ -49,7 +50,8 @@ func (job *refreshJob) Start() {
 			case <-ticker.C:
 				resetScreen()
 				refreshBg() // test
-				job.RefreshSig <- StartCmd
+				// job.RefreshSig <- StartCmd
+				job.work()
 
 			case cmd := <-job.chCmd:
 				if cmd == StopCmd {
@@ -60,6 +62,10 @@ func (job *refreshJob) Start() {
 			}
 		}
 	}()
+}
+
+func (job *refreshJob) SetWork(f func()) {
+	job.work = f
 }
 
 func (job *refreshJob) Stop() {

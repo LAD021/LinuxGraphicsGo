@@ -18,8 +18,9 @@ func main() {
 	job := graphicgo.GetRefreshJob()
 	job.SetFPS(100)
 	job.SetWork(func() {
-		graphicgo.DrawLine(300, 300, 400, 500, graphicgo.RED, graphicgo.Bold)
-		graphicgo.DrawCircle(200, 200, 150, graphicgo.RED, graphicgo.Bold, false)
+		fmt.Println("good")
+		go graphicgo.DrawLine(300, 300, 400, 500, graphicgo.RED, graphicgo.Bold)
+		go graphicgo.DrawCircle(200, 200, 150, graphicgo.RED, graphicgo.Bold, false)
 	})
 	job.Start()
 	defer job.Stop()

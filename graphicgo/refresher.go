@@ -45,7 +45,7 @@ func (job *refreshJob) Start() {
 		for {
 			select {
 			case <-ticker.C:
-				refreshBgColor() // test
+				refreshBg() // test
 				resetScreen()
 			case cmd := <-job.chCmd:
 				if cmd == StopCmd {

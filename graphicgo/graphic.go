@@ -61,6 +61,10 @@ func refreshBgColor() {
 	}
 }
 
+func refreshBg() {
+	drawBuff = backgroundBuff
+}
+
 /**
  * @Description: to fill screen with bgColor
  */

@@ -20,19 +20,16 @@ func main() {
 	job.Start()
 	defer job.Stop()
 	go func() {
-		select {
-		case <-job.RefreshSig:
-			for i := int64(0); i < int64(100); i++ {
-				go graphicgo.DrawDot(i, i*2, graphicgo.RED, graphicgo.Middle)
-				fmt.Println(i)
+		for {
+			select {
+			case <-job.RefreshSig:
+				for i := int64(0); i < int64(100); i++ {
+					go graphicgo.DrawDot(i, i*2, graphicgo.RED, graphicgo.Middle)
+					fmt.Println(i)
+				}
 			}
 		}
 	}()
-	for i := int64(0); i < int64(100); i++ {
-		graphicgo.DrawDot(i, i*2, graphicgo.RED, graphicgo.Middle)
-		fmt.Println(i)
-		fmt.Println("good")
-	}
 	fmt.Println("Prepared")
 	var wg sync.WaitGroup
 	wg.Add(1)

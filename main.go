@@ -22,10 +22,12 @@ func main() {
 	go func() {
 		for {
 			select {
-			case <-job.RefreshSig:
-				for i := int64(0); i < int64(100); i++ {
-					go graphicgo.DrawDot(i, i*2, graphicgo.RED, graphicgo.Middle)
-					fmt.Println(i)
+			case cmd := <-job.RefreshSig:
+				if cmd == graphicgo.StartCmd {
+					for i := int64(0); i < int64(100); i++ {
+						go graphicgo.DrawDot(i, i*2, graphicgo.RED, graphicgo.Middle)
+						fmt.Println(i)
+					}
 				}
 			}
 		}

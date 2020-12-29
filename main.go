@@ -21,6 +21,7 @@ func main() {
 	defer job.Stop()
 	go func() {
 		for {
+			print("Ready")
 			select {
 			case cmd := <-job.RefreshSig:
 				if cmd == graphicgo.StartCmd {

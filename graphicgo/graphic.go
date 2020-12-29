@@ -69,7 +69,6 @@ func refreshBg() {
  * @Description: to fill screen with bgColor
  */
 func resetScreen() {
-	fmt.Println(drawBuff[0:3])
 	dev.Seek(0, 0)
 	_, err := dev.Write(drawBuff[:])
 	if err != nil {

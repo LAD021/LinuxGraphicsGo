@@ -1,6 +1,7 @@
 package main
 
 import (
+	"LinuxGraphicsGo/drawork"
 	"fmt"
 	"os"
 	"sync"
@@ -14,29 +15,15 @@ func main() {
 	}
 	defer graphicgo.GraphBye()
 	time.Sleep(100)
-	graphicgo.SetBgColor(graphicgo.GREEN)
+	graphicgo.SetBgColor(drawork.BkColor)
 	job := graphicgo.GetRefreshJob()
-	job.SetFPS(100)
+	job.SetFPS(drawork.FPS)
 	job.SetWork(func() {
-		go graphicgo.DrawLine(300, 300, 400, 500, graphicgo.RED, graphicgo.Bold)
-		go graphicgo.DrawCircle(200, 200, 150, graphicgo.RED, graphicgo.Bold, false)
+		graphicgo.DrawLine(300, 300, 400, 500, graphicgo.RED, graphicgo.Bold)
+		graphicgo.DrawCircle(200, 200, 150, graphicgo.RED, graphicgo.Bold, false)
 	})
 	job.Start()
 	defer job.Stop()
-	//go func() {
-	//	for {
-	//		select {
-	//		case cmd := <-job.RefreshSig:
-	//			fmt.Println("we are doing")
-	//			if cmd == graphicgo.StartCmd {
-	//				for i := int64(0); i < int64(100); i++ {
-	//					go graphicgo.DrawDot(i, i*2, graphicgo.RED, graphicgo.Middle)
-	//					fmt.Println(i)
-	//				}
-	//			}
-	//		}
-	//	}
-	//}()
 
 	fmt.Println("Prepared")
 	var wg sync.WaitGroup

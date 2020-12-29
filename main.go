@@ -19,7 +19,7 @@ func main() {
 	job.SetFPS(100)
 	job.Start()
 	defer job.Stop()
-	go func() {
+	func() {
 		for {
 			select {
 			case cmd := <-job.RefreshSig:
@@ -34,10 +34,6 @@ func main() {
 		}
 	}()
 
-	for {
-		a := <-job.RefreshSig
-		fmt.Println(a)
-	}
 	fmt.Println("Prepared")
 	var wg sync.WaitGroup
 	wg.Add(1)

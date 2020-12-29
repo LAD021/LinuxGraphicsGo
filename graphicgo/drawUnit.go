@@ -121,9 +121,9 @@ func DrawCircle(xc int64, yc int64, r int64, color [4]byte, width int, fill bool
 			drawCircle8(xc, yc, x, yi, color, width)
 		}
 		if d < 0 {
-			d = d + 4*x + 6
+			d = d + 2*x + 3
 		} else {
-			d = d + 4*(x-y) + 10
+			d = d + 2*(x-y) + 5
 			y--
 		}
 		x++

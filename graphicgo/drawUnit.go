@@ -90,13 +90,13 @@ func DrawLine(x1 int64, y1 int64, x2 int64, y2 int64, color [4]byte, width int) 
 
 func drawCircle8(xc int64, yc int64, x int64, y int64, color [4]byte, width int) {
 	DrawDot(xc+x, yc-y, color, width)
-	DrawDot(xc-x, yc+y, color, width)
-	DrawDot(xc-x, yc-y, color, width)
-	DrawDot(xc+x, yc+y, color, width)
-	DrawDot(xc+y, yc+x, color, width)
-	DrawDot(xc-y, yc+x, color, width)
-	DrawDot(xc+y, yc-x, color, width)
-	DrawDot(xc-y, yc-x, color, width)
+	//DrawDot(xc-x, yc+y, color, width)
+	//DrawDot(xc-x, yc-y, color, width)
+	//DrawDot(xc+x, yc+y, color, width)
+	//DrawDot(xc+y, yc+x, color, width)
+	//DrawDot(xc-y, yc+x, color, width)
+	//DrawDot(xc+y, yc-x, color, width)
+	//DrawDot(xc-y, yc-x, color, width)
 }
 
 func DrawCircle(xc int64, yc int64, r int64, color [4]byte, width int, fill bool) {
@@ -121,9 +121,9 @@ func DrawCircle(xc int64, yc int64, r int64, color [4]byte, width int, fill bool
 			drawCircle8(xc, yc, x, yi, color, width)
 		}
 		if d < 0 {
-			d = d + 2*x + 3
+			d = d + 4*x + 6
 		} else {
-			d = d + 2*(x-y) + 5
+			d = d + 4*(x-y) + 10
 			y--
 		}
 		x++

@@ -19,7 +19,8 @@ func main() {
 	job.SetFPS(100)
 	job.Start()
 	defer job.Stop()
-	go graphicgo.DrawCircle(200, 200, 50, graphicgo.RED, graphicgo.Bold, false)
+	graphicgo.DrawLine(300, 300, 400, 500, graphicgo.RED, graphicgo.Bold)
+	graphicgo.DrawCircle(200, 200, 50, graphicgo.RED, graphicgo.Bold, false)
 	go func() {
 		for {
 			select {

@@ -7,7 +7,6 @@ import (
 
 const screenSize = screenWidth * screenHeight * pixWidth
 
-var backgroundBuff [screenSize]byte
 var drawBuff [screenSize]byte
 
 var dev *os.File
@@ -52,17 +51,13 @@ func SetBgColor(color [4]byte) {
 	bgColor = color
 }
 
-func refreshBgColor() {
-	for i := 0; i < int(screenSize); i += int(pixWidth) {
-		backgroundBuff[i] = bgColor[0]
-		backgroundBuff[i+1] = bgColor[1]
-		backgroundBuff[i+2] = bgColor[2]
-		backgroundBuff[i+3] = bgColor[3]
-	}
-}
-
 func refreshBg() {
-	drawBuff = backgroundBuff
+	for i := int64(0); i < screenSize; i += 4 {
+		drawBuff[i] = bgColor[0]
+		drawBuff[i+1] = bgColor[1]
+		drawBuff[i+2] = bgColor[2]
+		drawBuff[i+3] = bgColor[3]
+	}
 }
 
 /**

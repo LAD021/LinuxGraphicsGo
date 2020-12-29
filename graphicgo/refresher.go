@@ -25,7 +25,7 @@ var (
 func GetRefreshJob() *refreshJob {
 	refresherOnce.Do(func() {
 		instance = &refreshJob{
-			chCmd: make(chan int),
+			chCmd: make(chan int, 100),
 			FPS:   24,
 		}
 	})

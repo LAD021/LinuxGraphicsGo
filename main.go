@@ -21,7 +21,6 @@ func main() {
 	defer job.Stop()
 	go func() {
 		for {
-
 			select {
 			case cmd := <-job.RefreshSig:
 				fmt.Println("we are doing")
@@ -34,6 +33,11 @@ func main() {
 			}
 		}
 	}()
+
+	for {
+		a := <-job.RefreshSig
+		fmt.Println(a)
+	}
 	fmt.Println("Prepared")
 	var wg sync.WaitGroup
 	wg.Add(1)

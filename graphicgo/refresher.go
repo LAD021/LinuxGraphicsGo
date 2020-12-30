@@ -16,6 +16,8 @@ type refreshJob struct {
 	FPS        int64
 	RefreshSig chan int
 	work       func()
+	init       func()
+	wg         *sync.WaitGroup
 }
 
 var (
@@ -42,21 +44,23 @@ func (job *refreshJob) Start() {
 		job.FPS = 24
 	}
 	timeSpace := time.Duration(int64(time.Second) / job.FPS)
-	ticker := time.NewTicker(timeSpace)
+	job.wg.Add(1)
 	go func() {
 		fmt.Println("Refresher Start!")
+		job.init()
+		ticker := time.NewTicker(timeSpace)
 		for {
 			select {
 			case <-ticker.C:
 				resetScreen()
-				refreshBg() // test
-				// job.RefreshSig <- StartCmd
+				refreshBg()
 				job.work()
 
 			case cmd := <-job.chCmd:
 				if cmd == StopCmd {
 					ticker.Stop()
 					fmt.Println("Refresher Stopped!")
+					job.wg.Done()
 					break
 				}
 			}
@@ -68,7 +72,15 @@ func (job *refreshJob) SetWork(f func()) {
 	job.work = f
 }
 
+func (job *refreshJob) SetInit(f func()) {
+	job.init = f
+}
+
 func (job *refreshJob) Stop() {
 	fmt.Println("Refresher Stopped")
 	job.chCmd <- StopCmd
+}
+
+func (job *refreshJob) SetWaitGroup(wg *sync.WaitGroup) {
+	job.wg = wg
 }

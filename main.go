@@ -14,19 +14,32 @@ func main() {
 		os.Exit(-1)
 	}
 	defer graphicgo.GraphBye()
-	time.Sleep(100)
 	graphicgo.SetBgColor(drawork.BkColor)
+	var wg sync.WaitGroup
 	job := graphicgo.GetRefreshJob()
 	job.SetFPS(drawork.FPS)
+
+	job.SetInit(func() {
+		time.Sleep(drawork.Stardelay)
+		drawork.InitCube()
+		drawork.DrawCube()
+	})
+
 	job.SetWork(func() {
-		graphicgo.DrawLine(300, 300, 400, 500, graphicgo.RED, graphicgo.Bold)
-		graphicgo.DrawCircle(200, 200, 150, graphicgo.RED, graphicgo.Bold, false)
+		//graphicgo.DrawLine(300, 300, 400, 500, graphicgo.RED, graphicgo.Bold)
+		//graphicgo.DrawCircle(200, 200, 150, graphicgo.RED, graphicgo.Bold, false)
+		drawork.Rotation()
+		drawork.Changing()
+		drawork.DrawCube()
+		drawork.IfEnd()
+		if drawork.End == 0 {
+			time.Sleep(drawork.EndDelay)
+			job.Stop()
+		}
 	})
 	job.Start()
 	defer job.Stop()
 
 	fmt.Println("Prepared")
-	var wg sync.WaitGroup
-	wg.Add(1)
 	wg.Wait()
 }

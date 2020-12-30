@@ -12,11 +12,14 @@ const (
 	Square_root_six   = 2.4494897427832
 	PI                = 3.1415926535898
 	Cubenum           = 29
-	LineColor         = graphicgo.RED
-	BkColor           = graphicgo.LightSkyBlue
 	TurnRate          = 3
 	Stardelay         = 800
 	EndDelay          = 1000
 	FPS               = 50
 	sidegap           = 8
+)
+
+var (
+	LineColor = graphicgo.RED
+	BkColor   = graphicgo.LightSkyBlue
 )

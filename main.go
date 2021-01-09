@@ -39,7 +39,7 @@ func main() {
 	})
 	job.Start()
 	defer job.Stop()
-
+	wg.Add(1)
 	fmt.Println("Prepared")
 	wg.Wait()
 }
